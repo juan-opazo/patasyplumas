@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  backend:
+    container_name: springboot-app
+    env_file:
+        "./server/.env"
+    build: ./server
+    volumes:
+      - ./server/:/usr/src/app/
+    expose:
+      - 5000
+    ports:
+      - "5000:5000"
+  frontend:
+    container_name: nextjs-app
+    build: ./client
+    volumes:
+      - ./client/:/usr/src/app-nextjs/
+    expose:
+      - 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
