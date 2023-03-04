@@ -29,4 +29,4 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_PASSWORD=root
 networks:
-  petcare:
+  redpetcare:
