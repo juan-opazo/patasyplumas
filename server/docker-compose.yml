@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  pet_app:
+    image: 'pet-app1:latest'
+    build:
+      context: .
+    container_name: pet-container
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3307/democrud
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root      
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+    ports:
+      - 9090:9090
+    networks:
+      - redpetcare
+  db:
+    image: 'mysql:latest'
+    container_name: db
+    networks:
+      - redpetcare
+    environment:
+      - MYSQL_DATABASE=democrud
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=root
+networks:
+  petcare:
